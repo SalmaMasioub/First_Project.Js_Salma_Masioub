@@ -1,4 +1,124 @@
 
+function choose() {
+    let action = prompt("Choose an action: sign up, log in, or change password").toLowerCase().trim();
+    while (action !== "exit") {
+        if (action === 'sign up') {
+            signUp();
+        } else if (action === "log in") {
+            logIn();
+        } else if (action === "change password") {
+            changPass();
+        } else {
+            alert("action not found. Retry again.");
+            action = prompt("Choose an action: sign up, log in, or change password").toLowerCase().trim()
+        }
+    }
+    exit(action)
+}
+
+
+// ~ classes 
+// ^ userClass
+class User {
+    static allUsers = []
+    constructor(fullName, email, age, pass, money, history,) {
+        this.fullName = fullName
+        this.email = email
+        this.age = age
+        this.pass = pass
+        this.money = 1000
+        this.history = []
+
+        User.allUsers.push(this)
+    }
+}
+
+
+// ~ functions
+// ^ exit function
+function exit(param) {
+    if (param == "exit") {
+        alert("good bye!")
+        choose()
+    }
+}
+// ^ capitalize function
+function capitalize(str) {
+    return str.split(" ").map(e => e.charAt(0).toUpperCase() + e.slice(1).toLowerCase()).join(" ");
+}
+// ^ signUp function 
+function signUp() {
+    let fullName = prompt("Enter your full name").trim()
+    //* nameChecker function
+    function nameChecker() {
+        exit(fullName)
+        let regex = /[0-9\-#\)@!$%^&*()_+=\[\]{};:'",<>\./?\\|`~]/
+        while (fullName.split(" ").join("").length < 5 || regex.test(fullName)) {
+            fullName = prompt("Please provide a valid name with a minimum of 5 characters without special characters")
+        }
+        return capitalize(fullName)
+    }
+    fullName = nameChecker();
+
+    let email = prompt("Enter your email").trim().toLowerCase()
+    // * emailChecker function 
+    function emailChecker() {
+        exit(email)
+
+        while (/\s/.test(email) || email.length < 10 || !/@/.test(email) || email.split('@').length !== 2 || User.allUsers.some(e => e.email == email)) {
+            exit(email)
+            email = prompt("Enter a valid email").trim().toLowerCase()
+        }
+        return email
+    }
+    email = emailChecker();
+    let age = parseInt(prompt("Enter your age").trim())
+    // * ageChecker function
+    function ageChecker() {
+        exit(age)
+        while (isNaN(age) || age < 10 || age > 99) {
+            age = parseInt(prompt("Enter a valid age!"))
+        }
+    }
+    age = ageChecker();
+    let pass = prompt("Choose password")
+    // * passwordchecker
+    function passwordchecker() {
+        let regex = /[0-9\-#\)@!$%^&*()_+=\[\]{};:'",<>\./?\\|`~]/
+        while (/\s/.test(pass) || !regex.test(pass) || pass.length < 7) {
+            exit(pass)
+            while (/\s/.test(pass) || !regex.test(pass)) {
+                exit(pass)
+                pass = prompt("Oops! The password shouldn't contain spaces and must include at least one special character.")
+                    ;
+            } while (pass.length < 7) {
+                exit(pass)
+                pass = prompt("Oops! Invalid password. It needs to be at least 7 characters .");
+            }
+            let confirmationPass = prompt("Confirm your password")
+            while (pass !== confirmationPass) {
+                exit(confirmationPass)
+                confirmationPass = prompt("Oops! the passwords do not match, confirm your password again ")
+            }
+            alert("accout create succesfuly")
+        }
+        return pass
+    }
+    pass = passwordchecker();
+
+    let user = new User(fullName, email, age, pass)
+    User.allUsers.push(user)
+    choose()
+
+}
+
+// ^logIn function
+function logIn() {
+}
+// ^changing password function
+function changPass() {
+
+}
 
 
 
