@@ -1,4 +1,3 @@
-
 function choose() {
     let action = prompt("Choose an action: sign up, log in, or change password").toLowerCase().trim();
     while (action !== "exit") {
@@ -13,7 +12,7 @@ function choose() {
             action = prompt("Choose an action: sign up, log in, or change password").toLowerCase().trim()
         }
     }
-    exit(action)
+    exit(choose())
 }
 
 
@@ -79,6 +78,7 @@ function signUp() {
         while (isNaN(age) || age < 10 || age > 99) {
             age = parseInt(prompt("Enter a valid age!"))
         }
+        return age
     }
     age = ageChecker();
     let pass = prompt("Choose password")
@@ -86,31 +86,53 @@ function signUp() {
     function passwordchecker() {
         let regex = /[0-9\-#\)@!$%^&*()_+=\[\]{};:'",<>\./?\\|`~]/
         while (/\s/.test(pass) || !regex.test(pass) || pass.length < 7) {
-            exit(pass)
             while (/\s/.test(pass) || !regex.test(pass)) {
                 exit(pass)
                 pass = prompt("Oops! The password shouldn't contain spaces and must include at least one special character.")
                     ;
-            } while (pass.length < 7) {
+            }
+            while (pass.length < 7) {
                 exit(pass)
                 pass = prompt("Oops! Invalid password. It needs to be at least 7 characters .");
             }
-            let confirmationPass = prompt("Confirm your password")
-            while (pass !== confirmationPass) {
-                exit(confirmationPass)
-                confirmationPass = prompt("Oops! the passwords do not match, confirm your password again ")
-            }
-            alert("accout create succesfuly")
         }
+
+        let confirmationPass = prompt("Confirm your password")
+        if (pass !== confirmationPass) {
+            exit(confirmationPass)
+            confirmationPass = prompt("Oops! the passwords do not match, confirm your password again ")
+            if(pass !== confirmationPass){
+                alert("Good luck in the next time")
+                choose()
+            }else{"welcome"}
+            choose()
+        } else {
+            alert("Account created successfully")  
+        }  
         return pass
     }
-    pass = passwordchecker();
 
-    let user = new User(fullName, email, age, pass)
-    User.allUsers.push(user)
-    choose()
+    pass = passwordchecker()
+        let user = new User(fullName, email, age, pass);
+       User.allUsers.push(user);
+      console.table(User.allUsers);
+  
 
+ choose()
+
+ 
+  
 }
+
+
+
+
+
+
+
+
+
+
 
 // ^logIn function
 function logIn() {
@@ -122,4 +144,8 @@ function changPass() {
 
 
 
+
+choose()
+signUp()
+console.log(allUsers);
 
