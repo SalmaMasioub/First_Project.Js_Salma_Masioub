@@ -117,7 +117,7 @@ function signUp() {
        User.allUsers.push(user);
       console.table(User.allUsers);
   
-choose()
+logIn()
 
  
   
