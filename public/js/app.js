@@ -117,25 +117,32 @@ function signUp() {
        User.allUsers.push(user);
       console.table(User.allUsers);
   
-
- choose()
+choose()
 
  
   
 }
 
-
-
-
-
-
-
-
-
-
-
 // ^logIn function
 function logIn() {
+let email = prompt("Enter you email").trim().toLocaleLowerCase()
+exit(email)
+let existmail = User.allUsers.find(e=> e.email == email)
+ while(!existmail){
+    alert("Email not found")
+    choose()
+ }
+
+ let password = prompt("Enter your password")
+ while(password !== existmail.pass){
+    alert("The password doesn't match the email . Try again" )
+    choose()
+ }
+alert(`welcome ${existmail.fullName} you have ${existmail.money} in your bank account`)
+
+
+
+
 }
 // ^changing password function
 function changPass() {
