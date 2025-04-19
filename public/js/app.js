@@ -183,7 +183,7 @@ function changePass(){
          choose()
      } else {
          alert(`welcome ${existmail.fullName} you have ${existmail.money} in your ban account.`)  
-         menu()
+        choose()
      }  
     existmail.pass= newPass
     console.log(existmail.pass);
@@ -197,12 +197,14 @@ function withdraw (user){
     if (withdraw <= user.money) {
        user.money -= withdraw
        console.log(`Your withdrawal of ${withdraw}MAD is complete. You still have ${user.money} dirhams left.`);
-       user.history.push(`${user.fullname} withdrew ${withdraw} MAD on ${date}`);
+       user.history.push(`${user.fullName} withdrew ${withdraw} MAD on ${date}`);
        console.table(user.history);
    } else {
        alert(`You have only ${user.money}`);
 
    }
+
+   choose()
    }
 // ^ the deposit function
 function deposit(user){
@@ -211,11 +213,14 @@ function deposit(user){
     if(deposit<=1000){
         user.money += deposit
         console.log(`Your deposit of ${deposit} MAD is complete. Now you have ${user.money} dirhams.`);
+        user.history.push(`${user.fullName} deposited ${deposit} MAD on ${date} ; `)
+        console.table(user.history);
 
-        user.history.push(`${user.fullName} deposited ${user.deposit} MAD on ${date} ; `)
     }else{
         alert(`Deposits over 1000 MAD are not allowed`)
     }
+
+    choose()
 }
 // ^ loan function
 function loan(user){
@@ -224,7 +229,9 @@ function loan(user){
       user.credit += loan
       console.log(`You loaned ${loan}. now you have ${user.money + loan} MAD`);
       user.history.push(`${user.fullName} loaned ${loan} on${date}`)
+      console.table(user.history);
     }
+    choose()
 }
 // ^ invest function
 function invest(user){
@@ -236,8 +243,9 @@ function invest(user){
     user.history.push(`${user.fullName} invested ${invest} on ${date}`)
     console.table(user.history);
 
-menu()
+choose()
 }
+
 
 // ^ menu function
 function menu(user){
@@ -248,15 +256,15 @@ function menu(user){
            choose()
            console.log("User logged out.");
            return;
-       } else if (menu == "withdraw") {
+       } else if (menu === "withdraw") {
            withdraw(user);
-       } else if (menu == "deposit") {
+       } else if (menu === "deposit") {
            deposit(user);
-       } else if (menu == "credit") {
-           credit(user);
+       } else if (menu === "credit") {
+           loan(user);
        } else if (menu === "invest") {
            invest(user);
-       } else if (menu == "history") {
+       } else if (menu === "history") {
            history(user);
        } else {
            alert("Action not found. Retry again.");
