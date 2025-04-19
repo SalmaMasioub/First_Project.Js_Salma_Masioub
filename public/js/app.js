@@ -172,7 +172,17 @@ function deposit(user){
         alert(`Deposits over 1000 MAD are not allowed`)
     }
 }
-   
+
+// ^ loan function
+function loan(user){
+    let date = new Date().toLocaleDateString()
+    let loan = parseInt(prompt("How much you want to loan?"))
+    if(loan <= user.money * 0.2){
+      this.credit += loan
+      console.log(`You loaned ${loan}. now you have ${user.money + loan} MAD`);
+      user.history.push(`${user.fullName} loaned ${loan} on${date}`)
+    }
+}
 // ^ menu function
 function menu(user){
     if(true){
