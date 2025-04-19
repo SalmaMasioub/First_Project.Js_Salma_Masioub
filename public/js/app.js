@@ -147,18 +147,31 @@ menu(existmail)
 // ^ withdraw function
 function withdraw (user){
     let withdraw = parseInt(prompt("How much you want withdraw?"))
+    let date = new Date().toLocaleDateString()
     if (withdraw <= user.money) {
        user.money -= withdraw
-       let date = new Date().toLocaleDateString()
-       console.log(`Your withdrawal of ${withdraw}$ is complete. You still have ${user.money} dirhams left.`);
-       user.history.push(`${user.fullname} withdrew ${withdraw}$ on ${date}`);
+       console.log(`Your withdrawal of ${withdraw}MAD is complete. You still have ${user.money} dirhams left.`);
+       user.history.push(`${user.fullname} withdrew ${withdraw} MAD on ${date}`);
    } else {
        alert(`You have only ${user.money}`);
 
    }
    }
 
+// ^ the deposit function
+function deposit(user){
+    let deposit = parseInt("How much would you want to deposit")
+    let date = new Date().toLocaleDateString()
 
+    if(deposit<=1000){
+        user.money += deposit
+        console.log(`Your deposit of ${deposit} MAD is complete. Now you have ${user.money} dirhams.`);
+
+        user.history.push(`${user.fullName} deposited ${user.deposit} MAD on ${date} ; `)
+    }else{
+        alert(`Deposits over 1000 MAD are not allowed`)
+    }
+}
    
 // ^ menu function
 function menu(user){
