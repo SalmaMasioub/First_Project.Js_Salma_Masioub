@@ -21,13 +21,14 @@ let date = new Date().toLocaleDateString()
 // ^ userClass
 class User {
     static allUsers = []
-    constructor(fullName, email, age, pass, money,credit, history,) {
+    constructor(fullName, email, age, pass, money,credit,invest, history,) {
         this.fullName = fullName
         this.email = email
         this.age = age
         this.pass = pass
         this.money = 1000
         this.credit=0
+        this.invest = 0
         this.history = []
         
 
@@ -143,7 +144,11 @@ let existmail = User.allUsers.find(e=> e.email == email)
  }
 alert(`welcome ${existmail.fullName} you have ${existmail.money} in your bank account`)
 
-
+if(existmail.invest>0){
+    existmail.money += existmail.invest *0.2
+    existmail.invest += existmail.invest *0.2
+    console.log(`${existmail.fullName} rb7 ${existmail.invest *0.2} db wlat 3ndu ${existmail.money}`);
+}
 menu(existmail)
 
 }
@@ -238,7 +243,7 @@ function invest(user){
     let invest = parseInt(prompt("How much you want to invest"))
     if(invest <= user.money)
    { user.money -= invest
-    user.money += invest *0.2
+    user.invest += invest
     console.log(`You invested ${invest} now you have ${user.money}`);}
     user.history.push(`${user.fullName} invested ${invest} on ${date}`)
     console.table(user.history);
@@ -268,12 +273,10 @@ function menu(user){
            history(user);
        } else {
            alert("Action not found. Retry again.");
-           menu()
+          choose()
        }
     }
    }
-
-
 
 choose()
 
