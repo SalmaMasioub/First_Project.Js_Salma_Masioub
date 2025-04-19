@@ -144,7 +144,22 @@ alert(`welcome ${existmail.fullName} you have ${existmail.money} in your bank ac
 menu(existmail)
 
 }
+// ^ withdraw function
+function withdraw (user){
+    let withdraw = parseInt(prompt("How much you want withdraw?"))
+    if (withdraw <= user.money) {
+       user.money -= withdraw
+       let date = new Date().toLocaleDateString()
+       console.log(`Your withdrawal of ${withdraw}$ is complete. You still have ${user.money} dirhams left.`);
+       user.history.push(`${user.fullname} withdrew ${withdraw}$ on ${date}`);
+   } else {
+       alert(`You have only ${user.money}`);
 
+   }
+   }
+
+
+   
 // ^ menu function
 function menu(user){
     if(true){
