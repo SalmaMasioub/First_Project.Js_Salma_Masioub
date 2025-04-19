@@ -141,9 +141,40 @@ let existmail = User.allUsers.find(e=> e.email == email)
 alert(`welcome ${existmail.fullName} you have ${existmail.money} in your bank account`)
 
 
-
+menu(existmail)
 
 }
+
+// ^ menu function
+function menu(user){
+    if(true){
+       let menu = ("Choose action : log out, withdraw, deposit, credit, invest, history")
+       if (menu == "log out") {
+           alert("You have been logged out.");
+           choose()
+           console.log("User logged out.");
+           return;
+       } else if (menu == "withdraw") {
+           withdraw(user);
+       } else if (menu == "deposit") {
+           deposit(user);
+       } else if (menu == "credit") {
+           credit(user);
+       } else if (menu === "invest") {
+           invest(user);
+       } else if (menu == "history") {
+           history(user);
+       } else {
+           alert("Action not found. Retry again.");
+           menu()
+       }
+    }
+   }
+   
+   
+   
+
+
 // ^changing password function
 function changPass() {
 
