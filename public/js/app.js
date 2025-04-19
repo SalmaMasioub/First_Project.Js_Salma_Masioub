@@ -21,13 +21,15 @@ let date = new Date().toLocaleDateString()
 // ^ userClass
 class User {
     static allUsers = []
-    constructor(fullName, email, age, pass, money, history,) {
+    constructor(fullName, email, age, pass, money,credit, history,) {
         this.fullName = fullName
         this.email = email
         this.age = age
         this.pass = pass
         this.money = 1000
+        this.credit=0
         this.history = []
+        
 
         User.allUsers.push(this)
     }
@@ -115,7 +117,7 @@ function signUp() {
 
     pass = passwordchecker()
         let user = new User(fullName, email, age, pass);
-       User.allUsers.push(user);
+  
       console.table(User.allUsers);
   
 choose()
@@ -180,11 +182,12 @@ function changePass(){
          }else{"welcome"}
          choose()
      } else {
-         alert(`Xelcome ${User.allUsers.fullName} you have ${User.allUsers.money} in your ban account.`)  
+         alert(`welcome ${existmail.fullName} you have ${existmail.money} in your ban account.`)  
          menu()
      }  
-    
-     return  User.user.pass = newPass
+    existmail.pass= newPass
+    console.log(existmail.pass);
+    logIn()
  }
 
 // ^ withdraw function
@@ -195,6 +198,7 @@ function withdraw (user){
        user.money -= withdraw
        console.log(`Your withdrawal of ${withdraw}MAD is complete. You still have ${user.money} dirhams left.`);
        user.history.push(`${user.fullname} withdrew ${withdraw} MAD on ${date}`);
+       console.table(user.history);
    } else {
        alert(`You have only ${user.money}`);
 
