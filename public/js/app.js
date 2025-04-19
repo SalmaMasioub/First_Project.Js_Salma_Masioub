@@ -6,7 +6,7 @@ function choose() {
         } else if (action === "log in") {
             logIn();
         } else if (action === "change password") {
-            changPass();
+            changePass();
         } else {
             alert("action not found. Retry again.");
             action = prompt("Choose an action: sign up, log in, or change password").toLowerCase().trim()
@@ -118,7 +118,7 @@ function signUp() {
        User.allUsers.push(user);
       console.table(User.allUsers);
   
-logIn()
+choose()
 
  
   
@@ -145,6 +145,48 @@ alert(`welcome ${existmail.fullName} you have ${existmail.money} in your bank ac
 menu(existmail)
 
 }
+
+// ^ changePassword function
+function changePass(){
+    let email = prompt("Enter you email").trim().toLocaleLowerCase()
+    exit(email)
+    let existmail = User.allUsers.find(e=> e.email == email)
+     while(!existmail){
+        alert("Email not found")
+        choose()
+     }
+
+     let newPass = prompt("Enter a new password ")
+     let regex = /[0-9\-#\)@!$%^&*()_+=\[\]{};:'",<>\./?\\|`~]/
+     while (/\s/.test(newPass) || !regex.test(newPass) || newPass.length < 7) {
+         while (/\s/.test(newPass) || !regex.test(newPass)) {
+             exit(newPass)
+             newPass = prompt("Oops! The password shouldn't contain spaces and must include at least one special character.")
+                 ;
+         }
+         while (newPass.length < 7) {
+             exit(newPass)
+             newPass = prompt("Oops! Invalid password. It needs to be at least 7 characters .");
+         }
+     }
+
+     let confirm = prompt("Confirm your new password")
+     if (newPass!== confirm) {
+         exit(confirm)
+         confirm = prompt("Oops! the passwords do not match, confirm your password again ")
+         if(newPass !== confirm){
+             alert("Good luck in the next time")
+             choose()
+         }else{"welcome"}
+         choose()
+     } else {
+         alert(`Xelcome ${User.allUsers.fullName} you have ${User.allUsers.money} in your ban account.`)  
+         menu()
+     }  
+    
+     return  User.user.pass = newPass
+ }
+
 // ^ withdraw function
 function withdraw (user){
     let withdraw = parseInt(prompt("How much you want withdraw?"))
@@ -158,10 +200,9 @@ function withdraw (user){
 
    }
    }
-
 // ^ the deposit function
 function deposit(user){
-    let deposit = parseInt("How much would you want to deposit")
+    let deposit = parseInt(prompt("How much would you want to deposit"))
 
     if(deposit<=1000){
         user.money += deposit
@@ -172,32 +213,32 @@ function deposit(user){
         alert(`Deposits over 1000 MAD are not allowed`)
     }
 }
-
 // ^ loan function
 function loan(user){
     let loan = parseInt(prompt("How much you want to loan?"))
     if(loan <= user.money * 0.2){
-      this.credit += loan
+      user.credit += loan
       console.log(`You loaned ${loan}. now you have ${user.money + loan} MAD`);
       user.history.push(`${user.fullName} loaned ${loan} on${date}`)
     }
 }
-
 // ^ invest function
 function invest(user){
-    let invest = parseInt("How much you want to invest")
+    let invest = parseInt(prompt("How much you want to invest"))
     if(invest <= user.money)
    { user.money -= invest
     user.money += invest *0.2
     console.log(`You invested ${invest} now you have ${user.money}`);}
     user.history.push(`${user.fullName} invested ${invest} on ${date}`)
-}
+    console.table(user.history);
 
+menu()
+}
 
 // ^ menu function
 function menu(user){
     if(true){
-       let menu = ("Choose action : log out, withdraw, deposit, credit, invest, history")
+       let menu = prompt("Choose action : log out, withdraw, deposit, credit, invest, history")
        if (menu == "log out") {
            alert("You have been logged out.");
            choose()
@@ -222,20 +263,11 @@ function menu(user){
 
 
 
-   
-   
-   
-
-
-// ^changing password function
-function changPass() {
-
-}
-
-
-
-
 choose()
-signUp()
-console.log(allUsers);
+
+
+
+
+
+
 
