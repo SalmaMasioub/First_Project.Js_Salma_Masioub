@@ -15,6 +15,7 @@ function choose() {
     exit(choose())
 }
 
+let date = new Date().toLocaleDateString()
 
 // ~ classes 
 // ^ userClass
@@ -161,7 +162,6 @@ function withdraw (user){
 // ^ the deposit function
 function deposit(user){
     let deposit = parseInt("How much would you want to deposit")
-    let date = new Date().toLocaleDateString()
 
     if(deposit<=1000){
         user.money += deposit
@@ -175,7 +175,6 @@ function deposit(user){
 
 // ^ loan function
 function loan(user){
-    let date = new Date().toLocaleDateString()
     let loan = parseInt(prompt("How much you want to loan?"))
     if(loan <= user.money * 0.2){
       this.credit += loan
@@ -183,6 +182,18 @@ function loan(user){
       user.history.push(`${user.fullName} loaned ${loan} on${date}`)
     }
 }
+
+// ^ invest function
+function invest(user){
+    let invest = parseInt("How much you want to invest")
+    if(invest <= user.money)
+   { user.money -= invest
+    user.money += invest *0.2
+    console.log(`You invested ${invest} now you have ${user.money}`);}
+    user.history.push(`${user.fullName} invested ${invest} on ${date}`)
+}
+
+
 // ^ menu function
 function menu(user){
     if(true){
@@ -208,6 +219,9 @@ function menu(user){
        }
     }
    }
+
+
+
    
    
    
